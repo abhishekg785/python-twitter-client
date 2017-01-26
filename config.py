@@ -1,6 +1,5 @@
-# config.py
-
-# Twitter App credentials
+""" Twitter app credentials
+"""
 
 CONSUMER_KEY = 'LbQsdixQsq0YIJtXEFRtQACmO'
 CONSUMER_SECRET = 'aAeAYsd4IUpTccJVcdmOYyQg2wShqzPJIeW35ThR0yHUE9zfe0'

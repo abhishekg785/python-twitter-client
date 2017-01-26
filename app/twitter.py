@@ -2,31 +2,35 @@
     author : abhishek goswami ( Hiro )
     abhishekg785@gmail.com
 
-    Twitter Class
+    Twitter.py
     Creates an oauth connection with the Twitter using credentials from config.py
     Fetches the twitter data
 """
+
 from app import app
 
-# Required for Twitter class
+""" Required by the Twitter class
+OAuthHandler is required for handling oauth since Twitter API1.1
+requires oAuth
+"""
 from tweepy import OAuthHandler
 from tweepy import API
 from tweepy import Cursor
+
 import json
 
 
 class Twitter():
 
-    """
-        __init__ : Constructor
-
-        Sets the app credentials fetched from the config
-        Call the OAuthHandler and API function to authenticate the user credentials
-    """
     def __init__(self):
+        """ Sets the app credentials fetched from the config
+        Call the OAuthHandler and API function to authenticate the user credentials
+        app.config have been set in the __init__.py file.
+        app.config contains the twitter app credentials.
+        """ 
 
-        self.MAX_TWEETS = 50       # Max no of tweets to be fetched at a time
-        self.fetched_tweets_list = []
+        self.MAX_TWEETS = 50    # Max no of tweets to be fetched at a time
+        self.fetched_tweets_list = []   # List of the fetched tweets
 
         try:
             consumer_key = app.config['CONSUMER_KEY']
@@ -42,21 +46,21 @@ class Twitter():
             print error
 
 
-    """
-        Fetches the tweets for a particular hashTag
-
-        @param { String } hashtag_str The hashTag for which the tweets have to be fetched
-        @returns { list } tweets_json The list of the fetched tweets for the hashtag where each item is a tweet json
-     """
     def fetch_hashtag_tweets(self, hashtag_str):
+        """ Fetches the tweets for a particular hashTag
 
+        :param hashtag_str: The hashTag for which the tweets have to be fetched
+        :return: The list of the fetched tweets for the hashtag where each item is a tweet JSON
+        """
         try:
             print 'Fetching tweets for the #' + hashtag_str
             fetched_tweets = Cursor(self.api.search, q = str(hashtag_str)).items(self.MAX_TWEETS)
             for tweet in fetched_tweets:
                 tweet_json = json.loads(json.dumps(tweet._json))
+                # Getting the re-Tweet count of the tweet
                 re_tweet_count = tweet_json['retweet_count']
-                if re_tweet_count > 0:                               # For getting tweets that have been retweeted more than once
+                # For getting tweets that have been retweeted more than once
+                if re_tweet_count > 0:                               
                     self.fetched_tweets_list.append(tweet_json)
             return self.fetched_tweets_list
         except Exception as error:

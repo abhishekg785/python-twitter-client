@@ -6,8 +6,20 @@
 """
 
 from flask import Flask
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+
+""" For enabling Cross Domain Request
+"""
+CORS(app)
+
+""" Set the config file to app for later use
+config consist of the twitter app credentials
+"""
 app.config.from_object('config')
 
-from app import views  # Imported at the end as views depends on the app, to prevent circular import
+""" Views have been imported at the last as it is
+dependent on the app and to prevent circular import
+"""
+from app import views
