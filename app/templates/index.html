@@ -1,15 +1,15 @@
 <html>
 <head>
     <title>Twitter Client Demo</title>
+    <link href = "{{ url_for('static', filename = 'css/main.css') }}" type = 'text/css' rel = 'stylesheet' />
 </head>
 <body>
-<div class = 'loader'>
-
+<div class = 'tweetSection'>
+    <ul>
+        {% for tweet in fetched_tweets %}
+            <li>{{ tweet.text }}</li>
+        {% endfor %}
+    </ul>
 </div>
-{% for tweet in fetched_tweets %}
-    {{ tweet.text }} :
-    {{ tweet.retweet_count }}
-<hr/>
-{% endfor %}
 </body>
 </html>

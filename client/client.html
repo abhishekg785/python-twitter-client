@@ -17,6 +17,7 @@ I simply made an ajax call to retrieve the data using the api
     <link href = 'css/main.css' rel = 'stylesheet' type = 'text/css' />
 </head>
 <body>
+<div class = 'notification'> Click on the Tweet for more Info! </div>
 <div class = 'loaderSection'>
     <div class = 'outerSquare loaderSquare'>
     </div>
@@ -50,7 +51,8 @@ I simply made an ajax call to retrieve the data using the api
             TweetUserFollowerCount : [],
             ReTweetCount : [],
             FavouriteCount : [],
-            isTweetInfoDisplayVisible : false
+            isTweetInfoDisplayVisible : false,
+            isTweetDataFetched : false,
         }
 
         $Objects = {}
@@ -90,6 +92,7 @@ I simply made an ajax call to retrieve the data using the api
                     success : function(data) {
                         _Functions.HideLoader();
                         _Functions.PopulateTweetsInDOM(data);
+                        Globals.isTweetDataFetched = true;
                     },
                     error : function(error) {
                         console.log(error);
@@ -148,18 +151,34 @@ I simply made an ajax call to retrieve the data using the api
 
         }
 
+        /**
+        * the flow of the programme starts here :)
+        */
         $d.ready(function() {
             $Objects.loaderSection = $('.loaderSection');
             $Objects.tweetSection = $('.tweetSection ul');
             $Objects.displayTweetInfo = $('.displayTweetInfo');
             $Objects.displayTweetInfoList = $('.displayTweetInfo ul');
             $Objects.closeDisplayTweet = $('#closeDisplayTweet');
+            $Objects.notification = $('.notification');
             _Functions.init();  
 
             $Objects.closeDisplayTweet.on('click', function() {
                 if(Globals.isTweetInfoDisplayVisible) {
                     $Objects.displayTweetInfo.hide();
                     Globals.isTweetInfoDisplayVisible = false;
+                }
+            });
+
+            /**
+            * Controls the notification for the user
+            * Shows when the mouse is over the body 
+            */
+            $('body').on('mouseover', function() {
+                if(Globals.isTweetDataFetched) {
+                    $Objects.notification.css({
+                        right : '0px',
+                    });
                 }
             });
         });
