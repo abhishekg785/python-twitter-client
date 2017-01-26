@@ -39,4 +39,3 @@ run.py  :  for running up the project <br/>
 
 config.py file in the root folder so that it can be easily accessible when required to edit or etc.
 
-For getting the tweets that have been re-tweeted atleast once :
