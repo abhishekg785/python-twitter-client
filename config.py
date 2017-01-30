@@ -1,7 +1,8 @@
 """ Twitter app credentials
+Put your twitter app credentials here
 """
 
-CONSUMER_KEY = 'LbQsdixQsq0YIJtXEFRtQACmO'
-CONSUMER_SECRET = 'aAeAYsd4IUpTccJVcdmOYyQg2wShqzPJIeW35ThR0yHUE9zfe0'
-ACCESS_TOKEN_KEY = '3357450011-khX3jqWUPJfckVomtZpWgbJVDaidqMPodKHM79L'
-ACCESS_TOKEN_SECRET = 'jETOtrrLg7CEt4jQ0C0cWRcr4zukDa8pdz6kOLbBAn2Xg'
+CONSUMER_KEY = ''
+CONSUMER_SECRET = ''
+ACCESS_TOKEN_KEY = ''
+ACCESS_TOKEN_SECRET = ''
